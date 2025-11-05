@@ -48,7 +48,7 @@ export default function LoginHero({ onLogin }) {
               transition={{ delay: 0.2 }}
               className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-white via-cyan-200 to-indigo-200 bg-clip-text text-transparent"
             >
-              Elite ERP Portal
+              Welcome to EZ ERP
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -85,8 +85,8 @@ export default function LoginHero({ onLogin }) {
             <div className="pointer-events-none absolute -bottom-40 -left-10 h-80 w-80 rounded-full bg-indigo-500/20 blur-3xl" />
 
             <div className="mb-6">
-              <h2 className="text-white text-xl font-semibold">Welcome back</h2>
-              <p className="text-slate-300 text-sm">Sign in to continue to your workspace</p>
+              <h2 className="text-white text-xl font-semibold">Sign in</h2>
+              <p className="text-slate-300 text-sm">Access your EZ ERP workspace</p>
             </div>
 
             <label className="block text-sm text-slate-300 mb-2">Email</label>

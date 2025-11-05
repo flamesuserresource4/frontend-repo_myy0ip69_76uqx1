@@ -11,8 +11,16 @@ const cards = [
   { key: 'ppr', title: 'PPR Module', icon: Layers, gradient: 'from-sky-400 via-indigo-500 to-purple-600' },
 ];
 
-export default function Dashboard({ onOpenPeople }) {
+export default function Dashboard({ onOpenPeople, onOpenCore, onOpenSales, onOpenLeave, onOpenPPR }) {
   const [chatOpen, setChatOpen] = useState(false);
+
+  const handleOpen = (key) => {
+    if (key === 'people') return onOpenPeople?.();
+    if (key === 'core') return onOpenCore?.();
+    if (key === 'sales') return onOpenSales?.();
+    if (key === 'leave') return onOpenLeave?.();
+    if (key === 'ppr') return onOpenPPR?.();
+  };
 
   return (
     <div className="relative min-h-screen bg-slate-950 px-6 py-8">
@@ -26,7 +34,7 @@ export default function Dashboard({ onOpenPeople }) {
       <header className="relative z-10 flex items-center justify-between">
         <div className="space-y-1">
           <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white via-cyan-200 to-indigo-200 bg-clip-text text-transparent">
-            Welcome to your ERP
+            Welcome to EZ ERP
           </h1>
           <p className="text-slate-300">Choose a module to get started</p>
         </div>
@@ -45,7 +53,7 @@ export default function Dashboard({ onOpenPeople }) {
           {cards.map((c, idx) => (
             <motion.button
               key={c.key}
-              onClick={() => c.key === 'people' ? onOpenPeople?.() : null}
+              onClick={() => handleOpen(c.key)}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 * idx }}
@@ -62,7 +70,7 @@ export default function Dashboard({ onOpenPeople }) {
                     {c.key === 'people' ? 'Onboard, manage, and celebrate your team with elegance.' :
                      c.key === 'core' ? 'Organization settings, permissions, and platform control.' :
                      c.key === 'sales' ? 'Quotes, deals, and revenue pipelines with insights.' :
-                     c.key === 'leave' ? 'Leave policies, requests, and approvals in one spot.' :
+                     c.key === 'leave' ? 'Leave policies, requests, travel and payroll sync.' :
                      'Plan, perform, and review cycles streamlined.'}
                   </p>
                 </div>
