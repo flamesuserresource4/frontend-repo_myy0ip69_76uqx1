@@ -1,28 +1,50 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import LoginHero from './components/LoginHero';
+import Dashboard from './components/Dashboard';
+import PeopleModule from './components/PeopleModule';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [route, setRoute] = useState('login'); // 'login' | 'dashboard' | 'people'
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+    <div className="font-sans min-h-screen">
+      <AnimatePresence mode="wait">
+        {route === 'login' && (
+          <motion.div
+            key="login"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+            <LoginHero onLogin={() => setRoute('dashboard')} />
+          </motion.div>
+        )}
+
+        {route === 'dashboard' && (
+          <motion.div
+            key="dashboard"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+          >
+            <Dashboard onOpenPeople={() => setRoute('people')} />
+          </motion.div>
+        )}
+
+        {route === 'people' && (
+          <motion.div
+            key="people"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+          >
+            <PeopleModule onBack={() => setRoute('dashboard')} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
